@@ -2,17 +2,39 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'welcome#index'
+  get '/', to: 'welcome#index', as: 'root'
 
-  resources :merchants do
-    resources :items, only: :index
-  end
+  # resources :merchants do
+  #   resources :items, only: :index
+  # end
 
-  resources :items, only: [:index, :show, :edit, :update, :destroy] do
-    resources :reviews, only: [:new, :create]
-  end
+  get "/merchants/:merchant_id/items", to: 'items#index', as: 'merchant_items'
+  get '/merchants', to: 'merchants#index', as: 'merchants'
+  post '/merchants', to: 'merchants#create'
+  get '/merchants/new', to: 'merchants#new', as: 'new_merchant'
+  get '/merchants/:id/edit', to: 'merchants#edit', as: 'edit_merchant'
+  get '/merchants/:id', to: 'merchants#show', as: 'merchant'
+  patch '/merchants/:id', to: 'merchants#update'
+  put '/merchants/:id', to: 'merchants#update'
+  delete '/merchants/:id', to: 'merchants#destroy'
+  post '/items/:item_id/reviews', to: 'reviews#create', as: 'item_reviews'
+  get '/items/:item_id/reviews/new', to: 'reviews#new', as: 'new_item_review'
+  get '/items', to: 'items#index', as: 'items'
+  get '/items/:id/edit', to: 'items#edit', as: 'edit_item'
+  get '/items/:id', to: 'items#show', as: 'item'
+  patch '/items/:id', to: 'items#update'
+  put '/items/:id', to: 'items#update'
+  delete '/items/:id', to: 'items#destroy'
+  get '/reviews/:id/edit', to: 'reviews#edit', as: 'edit_review'
+  patch '/reviews/:id', to: 'reviews#update', as: 'review'
+  put '/reviews/:id', to: 'reviews#update'
+  delete '/reviews/:id', to: 'reviews#destroy'
 
-  resources :reviews, only: [:edit, :update, :destroy]
+  # resources :items, only: [:index, :show, :edit, :update, :destroy] do
+  #   resources :reviews, only: [:new, :create]
+  # end
+
+  # resources :reviews, only: [:edit, :update, :destroy]
 
   get '/cart', to: 'cart#show'
   post '/cart/:item_id', to: 'cart#add_item'
@@ -20,7 +42,8 @@ Rails.application.routes.draw do
   patch '/cart/:change/:item_id', to: 'cart#update_quantity'
   delete '/cart/:item_id', to: 'cart#remove_item'
 
-  resources :users, only: [:new]
+  # resources :users, only: [:new]
+  get '/users/new', to: 'users#new', as: 'new_user'
 
   get '/register', to: 'users#register'
   get '/profile', to: 'users#show', as: 'profile'
