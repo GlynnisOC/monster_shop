@@ -2,24 +2,7 @@
 
 ## Background and Description
 
-"Little Shop of Orders" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will automatically set the order status to "shipped". Each user role will have access to some or all CRUD functionality for application models.
-
-## Learning Goals
-
-### Rails
-* Create routes for namespaced routes
-* Implement partials to break a page into reusable components
-* Use Sessions to store information about a user and implement login/logout functionality
-* Use filters (e.g. `before_action`) in a Rails controller
-* Limit functionality to authorized users
-* Use BCrypt to hash user passwords before storing in the database
-
-### ActiveRecord
-* Use built-in ActiveRecord methods to join multiple tables of data, calculate statistics and build collections of data grouped by one or more attributes
-
-### Databases
-* Design and diagram a Database Schema
-* Write raw SQL queries (as a debugging tool for AR)
+Users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will automatically set the order status to "shipped". Each user role will have access to some or all CRUD functionality for application models.
 
 ## User Roles
 
@@ -38,3 +21,14 @@ In addition, some Registered users may work for a Merchant, these users will hav
 2. 'packaged' means all merchants have fulfilled their items for the order, and has been packaged and ready to ship
 3. 'shipped' means an admin has 'shipped' a package and can no longer be cancelled by a user
 4. 'cancelled' - only 'pending' and 'packaged' orders can be cancelled
+
+## Tech Stack & Initial Setup
+
+Built using Rails 5.2.3, Ruby 2.5.1, and a PostgreSQL database
+
+```git clone git@github.com:GlynnisOC/monster_shop.git```
+```cd monster_shop```
+```rails db:{create,migrate,seed}```
+
+From this point, you will want to deploy to Heroku in order to interact with the application as a user would. To simply interact with tests, run ```rspec```
+
